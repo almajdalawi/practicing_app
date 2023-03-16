@@ -1,0 +1,35 @@
+<% if !flash[:notice].blank? %>
+    <div class="notice-msg"><%= flash[:notice] %></div>
+<% elsif !flash[:error].blank? %>
+    <div class="error-msg"><%= flash[:error] %></div>
+<% end %>
+
+<%= link_to('Back to List', {action: 'index'}, class: 'back-link')%>
+
+<div class="Subject detail view">
+    <h1>Subject: <%= @subject.name %></h1>
+    <table class="listing" summary="Subject details">
+        <tr>
+            <th>Name</th>
+            <td><%= @subject.name %></td>
+        </tr>
+        <tr>
+            <th>Position</th>
+            <td><%= @subject.position %></td>
+        </tr>
+        <tr>
+            <th>Visible</th>
+            <td><%= @subject.visible ? "Yes" : "No" %></td>
+        </tr>
+        <tr>
+            <th>Created at</th>
+            <td><%= @subject.created_at %></td> 
+        </tr>
+        <tr>
+            <th>Updated at</th>
+            <td><%= @subject.updated_at %></td>
+        </tr>
+    </table>
+    <br>
+    <%= link_to('Edit', {action: 'edit', id: @subject.id}, class: 'action edit')%>
+    <%= link_to('Delete', {action: 'destroy', id: @subject.id}, method: :delete, data: { confirm: 'Are you sure?' }, class: 'action delete')%>

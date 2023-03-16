@@ -1,0 +1,16 @@
+<h1>Demo#hello</h1>
+<p>Hellow World!</p>
+
+
+ID: <%= params[:id] %>
+<br/>
+ID: <%= @id %>
+<br/>
+Page: <%= @page %>
+
+<br/>
+<%= link_to('Previous page', {action: 'hello', id: @id, page: @page - 1}) %>
+<%= link_to('Next page', {action: 'hello', id: @id, page: @page + 1}) %>
+
+<hr/>
+<%= params.inspect%>

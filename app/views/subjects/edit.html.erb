@@ -1,0 +1,26 @@
+<%= link_to('Back to List', {action: 'index'}, class: 'back-link')%>
+
+<div class="subject edit">
+    <h1>Update Subject</h1>
+    <%= form_for(:subject, url: {action: 'update', id: @subject.id}) do |f| %>
+        <table class="listing" summary="Subject form fields">
+            <tr>
+                <th>Name</th>
+                <td><%= f.text_field :name %></td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td><%= f.number_field :position %></td>
+            </tr>
+            <tr>
+                <th>Visible</th>
+                <td><%= f.check_box :visible %></td>
+            </tr>
+        </table>
+        <br>
+
+        <div class="form-btn">
+        <%= f.submit 'Update Subject' %>
+        </div>
+    <% end %>
+</div>

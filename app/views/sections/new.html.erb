@@ -1,0 +1,37 @@
+<%= link_to('Back to List', {action: 'index'}, class: 'back-link')%>
+
+<div class="section new">
+    <h1>Create New Section</h1>
+    <%= form_for(:section, url: {action: 'create'}) do |f| %>
+        <table class="listing" summary="Section form fields">
+            <tr>
+                <th>Name</th>
+                <td><%= f.text_field :name %></td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td><%= f.number_field :position %></td>
+            <tr>
+                <th>Visible</th>
+                <td><%= f.check_box :visible %></td>
+            </tr>
+            <tr>
+                <th>Page ID</th>
+                <td><%= f.select :page_id, options_for_select(@pages_ids) %></td>
+            </tr>
+            <tr>
+                <th>Content Type</th>
+                <td><%= f.select :content_type, options_for_select(@content_types) %></td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td><%= f.text_area :content %></td>
+            </tr>
+        </table>
+        <br>
+
+        <div class="form-btn">
+        <%= f.submit 'Create Section' %>
+        </div>
+    <% end %>
+</div>
