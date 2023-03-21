@@ -1,0 +1,55 @@
+<h2>number_to_currency</h2>
+<%= number_to_currency(34.5) %>
+<hr />
+
+<h2>number_to_currency with more options</h2>
+<%= number_to_currency(34.5, precision: 0 , unit: 'JOD', format: '%n %u') %>
+<hr />
+
+<h2>number_to_percentage</h2>
+<%= number_to_percentage(34.5) %>
+<hr />
+
+<h2>number_to_percentage with more options</h2>
+<%= number_to_percentage(34.5, precision: 1, separator: ',') %>
+<hr />
+
+<h2>number_with_precision</h2>
+<%= number_with_precision(34.56789) %>
+<hr />
+
+<h2>number_with_precision with more options</h2>
+<%= number_with_precision(34.56789, precision: 6) %>
+<hr />
+
+<h2>number_with_delimiter</h2>
+<%= number_with_delimiter(1234567890) %>
+<hr />
+
+<h2>number_with_delimiter with more options</h2>
+<%= number_with_delimiter(1234567890, delimiter: ' ') %>
+<hr />
+
+<h2>number_to_human</h2>
+<%= number_to_human(1234567890) %>
+<hr />
+
+<h2>number_to_human with more options</h2>
+<%= number_to_human(1234567890, precision: 5) %>
+<hr />
+
+<h2>number_to_human_size</h2>
+<%= number_to_human_size(1234567890) %>
+<hr />
+
+<h2>number_to_human_size with more options</h2>
+<%= number_to_human_size(1234567890, precision: 2) %>
+<hr />
+
+<h2>number_to_phone</h2>
+<%= number_to_phone(1234567890) %>
+<hr />
+
+<h2>number_to_phone with more options</h2>
+<%= number_to_phone(1234567890, area_code: true, delimiter: ' ', country_code: 1, extension: '321') %>
+<hr />

@@ -1,5 +1,7 @@
 class SubjectsController < ApplicationController
-  layout false
+  # layout false # or layout 'layout_name'
+
+  # before_action(:confirm_logged_in)
 
   def index
     @subjects = Subject.sorted # or Subject.all
@@ -11,6 +13,7 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new({visible: false})
+    @subject_count = Subject.count + 1  
   end
 
   def create
@@ -20,23 +23,28 @@ class SubjectsController < ApplicationController
       flash[:notice] = "Subject '#{@subject.name}' created successfully."
       redirect_to({action: 'index'})
     else
-      falsh[:error]= "Subject '#{@subject.name}' creation failed."
+      flash[:error]= "Subject '#{@subject.name}' creation failed."
+      @subject_count = Subject.count + 1  
       render('new')
     end
   end
 
   def edit 
     @subject = Subject.find(params[:id])
+    @subject_count = Subject.count + 1  
   end
 
   def update
     @subject = Subject.find(params[:id])
 
+    before_action(:confirm_logged_in)
+
     if @subject.update(subject_params)
       flash[:notice] = "Subject '#{@subject.name}' updated successfully."
       redirect_to({action: 'show', id: @subject.id})
     else
-      falsh[:error]= "Subject '#{@subject.name}' update failed."
+      flash[:error]= "Subject '#{@subject.name}' update failed."
+      @subject_count = Subject.count + 1  
       render('edit')
     end
   end

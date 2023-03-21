@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
-  layout false
+  require_relative '../models/subject'
+  # layout false # or layout 'layout_name'
+
+  # before_action(:confirm_logged_in)
 
   def index
     @pages = Page.sorted 
@@ -7,28 +10,34 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
+    @subject_name = Subject.find(@page.subject_id).name
   end
 
   def new
     @page = Page.new({visible: false})
-    @subjects_ids = Subject.all.map{|s| s.id}
+    @subjects = Subject.order('position ASC')
+    @page_count = Page.count + 1  
   end
 
   def create
     @page = Page.new(page_params)
+
 
     if @page.save
       flash[:notice] = "Page '#{@page.name}' is created successfully"
       redirect_to({action: 'index'})
     else 
       flash[:error] = "Page '#{@page.name}' creation failed."
+      @subjects = Subject.order('position ASC')
+      @page_count = Page.count + 1  
       render('new')
     end
   end
 
   def edit
     @page = Page.find(params[:id])
-    @subject_ids = Subject.all.map{|s| s.id}
+    @subjects = Subject.order('position ASC')
+    @page_count = Page.count + 1  
   end
 
   def update
@@ -38,7 +47,9 @@ class PagesController < ApplicationController
       flash[:notice] = "Page '#{@page.name}' updated successfully."
       redirect_to({action:'show', id: @page.id})
     else
-      falsh[:error] = "Page '#{@page.name}' update failed."
+      flash[:error] = "Page '#{@page.name}' update failed."
+      @subjects = Subject.order('position ASC')
+      @page_count = Page.count + 1  
       render('edit')
     end
   end

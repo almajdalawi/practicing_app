@@ -1,6 +1,6 @@
 class DemoController < ApplicationController
 
-  layout false
+  # layout false # or layout 'layout_name'
 
   def index
     @array = [1,2,3,4,5]
@@ -18,5 +18,17 @@ class DemoController < ApplicationController
 
   def lynda
     redirect_to("http://lynda.com")
+  end
+
+  def text_helpers
+  end
+
+  def numbers_helpers
+  end
+
+  def dateTime_helpers
+  end
+
+  def escaping_helpers
   end
 end

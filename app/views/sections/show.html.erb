@@ -1,8 +1,4 @@
-<% if !flash[:notice].blank? %>
-    <div class="notice-msg"><%= flash[:notice] %></div>
-<% elsif !flash[:error].blank? %>
-    <div class="error-msg"><%= flash[:error] %></div>
-<% end %>
+<% @page_title = 'Sections' %>
 
 <%= link_to('Back to List', {action: 'index'}, class: 'back-link')%>
 
@@ -22,8 +18,8 @@
             <td><%= @section.visible ? "Yes" : "No" %></td>
         </tr>
         <tr>
-            <th>Page ID</th>
-            <td><%= @section.page_id %></td>
+            <th>Page</th>
+            <td><%= @page_name %></td>
         </tr>
         <tr>
             <th>Content Type</th>

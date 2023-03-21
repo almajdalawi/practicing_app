@@ -1,12 +1,12 @@
-<% if !flash[:notice].blank? %>
-    <div class="notice-msg"><%= flash[:notice] %></div>
-<% elsif !flash[:error].blank? %>
-    <div class="error-msg"><%= flash[:error] %></div>
-<% end %>
+<% @page_title = 'Sections' %>
 
 <div class='section index' >
     <h1>Sections</h1>
-    <% link_to 'New Section', {action: 'new'}, class: 'action new' %>
+
+    <div> <%= pluralize(@sections.size, 'section')%> found 
+    <%= link_to(image_tag('plus_sign.png', size: '11x11', alt: '+') + ' New Section', {action: 'new'}, class: 'action new') %>
+    </div>
+
     <table class="listing" summary="Section list">
         <tr class="header">
         <th>&nbsp;</th>
@@ -14,22 +14,22 @@
         <th>Visible</th>
         <th>Content Type</th>
         <th>Page ID</th>
-        <th colspan="3">Actions</th>
+        <th>Actions</th>
         </tr>
         <% @sections.each do |section| %>
-        <tr>
+        <tr class="<%= cycle('odd', 'even') %>">
             <td><%= section.position %></td>
             <td><%= section.name %></td>
-            <td><%= section.visible ? "Yes" : "No" %></td>
+            <td class="center"><%= status_tag(section.visible) %></td>
             <td><%= section.content_type %></td>
-            <td><%= section.page_id %></td>
-
-            <td><%= link_to 'Show', {action: 'show', id: section.id}  %></td>
-            <td><%= link_to 'Edit', {action: 'edit', id: section.id}  %></td>
-            <td><%= link_to 'Destroy', {action: 'delete', id: section.id} %></td>
+            <td class="center"><%= section.page.name if section.page %></td>
+            <td class="actions">
+                <%= link_to('Show', {action: 'show', id: section.id}, class: 'action show')  %>
+                <%= link_to('Edit', {action: 'edit', id: section.id}, class: 'action edit')  %>
+                <%= link_to('Destroy', {action: 'delete', id: section.id}, class: 'action delete') %>
+            </td>
         </tr>
         <% end %>
     </table>
     <br>
-    <%= link_to 'New Section', {action: 'new'}, class: 'action new' %>
 </div>

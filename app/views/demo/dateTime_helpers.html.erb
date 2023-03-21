@@ -1,0 +1,57 @@
+<h2>Current time</h2>
+<%= Time.now%>
+<hr />
+
+<h2>Time after 30 days minous 23 minutes</h2>
+<%= Time.now + 30.days - 23.minutes %>
+<hr />
+
+<h2>Time 30 days ago and 30 days from now</h2>
+<%= 30.days.ago %>
+<%= 30.days.from_now %>
+<hr />
+
+<h2>Time beginning of day and end of day</h2>
+<%= Time.now.beginning_of_day %>
+<%= Time.now.end_of_day %>
+<hr />
+
+<h2>Time beginning of week and end of week</h2>
+<%= Time.now.beginning_of_week %>
+<%= Time.now.end_of_week %>
+<hr />
+
+<h2>Time beginning of month and end of month</h2>
+<%= Time.now.beginning_of_month %>
+<%= Time.now.end_of_month %>
+<hr />
+
+<h2>Time beginning of year and end of year</h2>
+<%= Time.now.beginning_of_year %>
+<%= Time.now.end_of_year %>
+<hr />
+
+<h2>Time yesterday, tomorrow, last week, last month, and lastg year</h2>
+<%= Time.now.yesterday %>
+<%= Time.now.tomorrow %>
+<%= Time.now.last_week %>
+<%= Time.now.last_month %>
+<%= Time.now.last_year %>
+<hr />
+
+<h2>the beginning of the day at the end of the month in the last year</h2>
+<%= Time.now.beginning_of_day.end_of_month.last_year %>
+<hr />
+
+<h2>Formated time using general symbols and ruby symbols</h2>
+<p>General ("%d/%m/%Y %H:%M") : <%= Time.now.strftime("%d/%m/%Y %H:%M") %></p>
+<p>db: <%= Time.now.to_s('db') %></p>
+<p>number: <%= Time.now.to_s('number') %></p>
+<p>short: <%= Time.now.to_s('short') %></p>
+<p>long: <%= Time.now.to_s('long') %></p>
+<p>long_ordinal: <%= Time.now.to_s('long_ordinal') %></p>
+<p>To add cutom format, add to config/initializers/time_formats.rb :  Time::DATE_FORMATS[:custom] = "%d/%m/%Y %H:%M"</p>
+<hr />
+
+
+

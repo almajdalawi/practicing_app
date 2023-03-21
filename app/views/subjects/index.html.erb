@@ -1,12 +1,12 @@
-<% if !flash[:notice].blank? %>
-    <div class="notice-msg"><%= flash[:notice] %></div>
-<% elsif !flash[:error].blank? %>
-    <div class="error-msg"><%= flash[:error] %></div>
-<% end %>
+<% @page_title = 'Subjects' %>
 
 <div class='subject index' >
     <h1>Subjects</h1>
-    <% link_to 'New Subject', {action: 'new'}, class: 'action new' %>
+
+    <div> <%= pluralize(@subjects.size, 'subject')%> found 
+    <%= link_to(image_tag('plus_sign.png', size: '11x11', alt: '+') + ' New Subject', {action: 'new'}, class: 'action new')%>
+    </div>
+
     <table class="listing" summary="Subject list">
         <tr class="header">
         <th>&nbsp;</th>
@@ -16,18 +16,18 @@
         <th colspan="3">Actions</th>
         </tr>
         <% @subjects.each do |subject| %>
-        <tr>
+        <tr class="<%= cycle('odd', 'even') %>">
             <td><%= subject.position %></td>
             <td><%= subject.name %></td>
-            <td><%= subject.visible ? "Yes" : "No" %></td>
-            <td><%= subject.pages.size %></td>
-
-            <td><%= link_to 'Show', {action: 'show', id: subject.id}  %></td>
-            <td><%= link_to 'Edit', {action: 'edit', id: subject.id}  %></td>
-            <td><%= link_to 'Destroy', {action: 'delete', id: subject.id} %></td>
+            <td class="center"><%= status_tag(subject.visible) %></td>
+            <td class="center"><%= subject.pages.size %></td>
+           <td class="actions">
+                <%= link_to('Show', {action: 'show', id: subject.id}, class: 'action show')  %>
+                <%= link_to('Edit', {action: 'edit', id: subject.id}, class: 'action edit')  %>
+                <%= link_to('Destroy', {action: 'delete', id: subject.id}, class: 'action delete') %>
+            </td>
         </tr>
         <% end %>
     </table>
     <br>
-    <%= link_to 'New Subject', {action: 'new'}, class: 'action new' %>
 </div>

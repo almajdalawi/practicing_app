@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_16_104444) do
+ActiveRecord::Schema.define(version: 2023_03_21_080939) do
 
   create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", limit: 25
     t.string "last_name", limit: 50
     t.string "email", limit: 100, default: "", null: false
     t.string "username", limit: 25
-    t.string "hashed_password", limit: 40
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
     t.index ["username"], name: "index_admin_users_on_username"
   end
 

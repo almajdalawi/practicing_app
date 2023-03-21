@@ -1,5 +1,7 @@
 class SectionsController < ApplicationController
-  layout false
+  # layout false # or layout 'layout_name'
+
+  # before_action(:confirm_logged_in)</div>
 
   def index
     @sections = Section.sorted
@@ -7,12 +9,14 @@ class SectionsController < ApplicationController
 
   def show
     @section = Section.find(params[:id])
+    @page_name = Page.find(@section.page_id).name
   end
 
   def new
     @section = Section.new({visible: false})
-    @pages_ids = Page.all.map{|p| p.id}
+    @pages = Page.order('position ASC')
     @content_types = Section::CONTENT_TYPES
+    @section_count = Section.count + 1  
   end
 
   def create
@@ -23,14 +27,18 @@ class SectionsController < ApplicationController
       redirect_to({action: 'index'})
     else
       flash[:error] = "Section #{@section.name} creation failed."
+      @pages = Page.order('position ASC')
+      @content_types = Section::CONTENT_TYPES
+      @section_count = Section.count + 1  
       render('new')
     end
   end
 
   def edit
     @section = Section.find(params[:id])
-    @pages_ids = Page.all.map{|p| p.id}
+    @pages = Page.order('position ASC')
     @content_types = Section::CONTENT_TYPES
+    @section_count = Section.count + 1  
   end
 
   def update
@@ -41,6 +49,9 @@ class SectionsController < ApplicationController
       redirect_to({action: 'show', id: @section.id})
     else
       flash[:error] = "Section #{@section.name} update failed."
+      @pages = Page.order('position ASC')
+      @content_types = Section::CONTENT_TYPES
+      @section_count = Section.count + 1  
       render('edit')
     end
   end

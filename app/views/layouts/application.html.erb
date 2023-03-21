@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PracticingApp</title>
+    <title>Simple CMS | <%= @page_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag('application', media: 'all', 'data-turbolinks-track': 'reload') %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= 'Simple CMS' %></h1>
+      <nav id="navigation">
+        <ul>
+          <li><%= link_to_unless_current('List of Subjects', {controller: 'subjects', action: 'index'}) %> </li>
+          <li><%= link_to_unless_current('List of Pages', {controller: 'pages', action: 'index'}) %> </li>
+          <li><%= link_to_unless_current('List of Sections', {controller: 'sections', action: 'index'}) %> </li>
+          <li><%= link_to_unless_current('Admin Users', {controller: 'access', action: 'index'}) %> </li>
+          <li><%= link_to_unless_current('Demo', {controller: 'demo', action: 'index'}) %> </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="notification">
+        <% if !flash[:notice].blank? %>
+          <div class="notice-msg"><%= flash[:notice] %></div>
+        <% elsif !flash[:error].blank? %>
+          <div class="error-msg"><%= flash[:error] %></div>
+        <% end %>
+      </div>
+      <div id="content">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 | All rights reserved.</p>
+    </footer>
+
   </body>
 </html>
